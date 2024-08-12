@@ -46,8 +46,8 @@ public class ProjectSecurityConfig {
         http.csrf((csrf)->csrf.disable())//csrf should be disabled for post and put http methods
                 .authorizeHttpRequests((requests) ->
                         requests.requestMatchers("/hello/**").permitAll()
-                                .requestMatchers("/users/**").hasAnyAuthority("ADMIN").authenticated()
-                )
+                                .requestMatchers("/users/**")
+                                .hasAnyAuthority("ADMIN"))
                 .httpBasic(Customizer.withDefaults());//added for enabling basic authentication
         return http.build();
     }
