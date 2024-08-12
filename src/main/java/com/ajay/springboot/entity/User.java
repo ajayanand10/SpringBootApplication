@@ -2,11 +2,13 @@ package com.ajay.springboot.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
 @Data
-public class User {
+public class User extends  BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
