@@ -1,9 +1,7 @@
 package com.ajay.springboot.config;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,8 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity
@@ -46,8 +42,7 @@ public class ProjectSecurityConfig {
         http.csrf((csrf)->csrf.disable())//csrf should be disabled for post and put http methods
                 .authorizeHttpRequests((requests) ->
                         requests.requestMatchers("/hello/**").permitAll()
-                                .requestMatchers("/users/**")
-                                .hasAnyAuthority("ADMIN"))
+                                .requestMatchers("/users/**").hasAnyAuthority("ADMIN"))
                 .httpBasic(Customizer.withDefaults());//added for enabling basic authentication
         return http.build();
     }
